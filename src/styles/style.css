@@ -5,21 +5,27 @@
     --cor4: #ccc;
 }
 
+@keyframes tremer{
+    0%{
+        right: 0px;
+    }
+    25%{
+        right: 5px;
+    }
+    75%{
+        right: -5px;
+    }
+    100%{
+        right: 0px;
+    }
+}
+
 body{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-image: linear-gradient(to bottom, var(--cor2), var(--cor1));
-}
-
-span{
-    position: fixed;
-    top: 10px;
-    left: auto;
-    background-color: var(--cor4);
-    padding: 10px 20px;
-    border-radius: 5px 20px;    
 }
 
 main{
@@ -45,6 +51,7 @@ table{
 }
 
 td{
+    position: relative;
     text-align: center;
     background-color: var(--cor4);
     border: 1px solid black;
@@ -54,4 +61,10 @@ td{
 td:hover{
     transition: 0.1s;
     transform: scale(1.1, 1.1);
+}
+
+.tremer{
+    animation-name: tremer;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
 }
