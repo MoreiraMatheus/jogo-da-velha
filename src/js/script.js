@@ -4,7 +4,7 @@ let playerAtual = 'X'
 let vencedor = false
 
 let round = 0 //indica o round atual
-const possiveisVitorias = [
+const possiveisVitorias = [ //combinações de vitória
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -26,7 +26,7 @@ function jogar(item){
     if(item.classList.contains('livre')){
         item.classList.remove('livre')
         round++
-        trocaFundo(item)
+        XouO(item)
         vencedor = confereVitoria(playerAtual)
         console.log(vencedor)
         if(vencedor == true){
@@ -43,7 +43,7 @@ function jogar(item){
     }
 }
 
-function trocaFundo(elemento){ //função que troca a cor de fundo de acordo com o round atual, para diferenciar qual jogador está jogando
+function XouO(elemento){ //função que adiciona "X" ou "O" na tela
     if(round % 2 == 1){
         playerAtual = 'X'
         elemento.classList.add('X')
@@ -58,7 +58,7 @@ function trocaFundo(elemento){ //função que troca a cor de fundo de acordo com
     }
 }
 
-function resetgame(){// função que adiciona a classe 'livre' a cada campo e muda a cor de fundo
+function resetgame(){
     round = 0
     playerAtual = 'X'
     td.forEach(item => {
@@ -78,3 +78,7 @@ function confereVitoria(playerAtual){
         })
     })
 }
+
+//Tasks:
+//ver a possibilidade de tirar a variável round
+//adicionar tela caso haja vencedor ou dê velha, essa tela será responsável por travar o jogo antes do reset, terá botão de "OK"
