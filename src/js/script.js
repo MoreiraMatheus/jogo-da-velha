@@ -1,50 +1,64 @@
 const td = document.querySelectorAll('td') //lista de campos clicáveis 
+const deuVelha = document.getElementById('velha')
+
 let round = 0 //indica o round atual
-let grade = [
-    [[],[],[]],
-    [[],[],[]],
-    [[],[],[]]
+const possiveisVitorias = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ]
 
+for(let i = 0; i <= td.length-1; i++){
+    console.log(td[i].cellIndex)
+}
+
 td.forEach(item => {
-    const dados = item // variável usada para inserrir o elemento dentro EventListner
     item.addEventListener('click', () =>{
-        // verifica se o campo já foi clicado ou não
-         if(item.classList.contains('livre')){
-            item.classList.remove('livre')
-            round++
-            trocaFundo(dados)
-            if(round == 9){ //caso dê velha
-                resetFundo() 
-                round = 0
-                window.alert('deu velha') 
-            }
-        }
-        else{
-            jaClicou(dados)
-        }
+        jogar(item)
     })
 })
 
-function trocaFundo(elemento){ //função que troca a cor de fundo de acordo com o round atual, para diferenciar qual jogador está jogando
-    if(round % 2 == 1){
-        console.log(`Round:${round} numero impar`)
-        elemento.style.backgroundColor = 'blue'
+function jogar(item){
+    // verifica se o campo já foi clicado ou não
+    if(item.classList.contains('livre')){
+        item.classList.remove('livre')
+        round++
+        trocaFundo(item)
+        confereVitoria()
+        if(round == 9){ //caso dê velha
+            round = 0
+            iniciagame()
+        }
     }
     else{
-        console.log(`Round:${round} numero par`)
-        elemento.style.backgroundColor = 'red'
+        item.classList.add('tremer')
     }
 }
 
-function resetFundo(){ // função que adiciona a classe 'livre' a cada campo e muda a cor de fundo
+function trocaFundo(elemento){ //função que troca a cor de fundo de acordo com o round atual, para diferenciar qual jogador está jogando
+    if(round % 2 == 1){
+        elemento.innerText = 'x'
+        elemento.style.color = 'yellow'
+    }
+    else{
+        elemento.innerText = 'O'
+        elemento.style.color = 'purple'
+    }
+}
+
+function iniciagame(){// função que adiciona a classe 'livre' a cada campo e muda a cor de fundo
     td.forEach(item => {
         item.style.backgroundColor = '#ccc'
+        item.innerText = ''
         item.classList.add('livre')
     })
 }
 
-function jaClicou(elemento){
-    elemento.classList.add('tremer')
-    console.log('campo já selecionado')
+function confereVitoria(){
+    
 }

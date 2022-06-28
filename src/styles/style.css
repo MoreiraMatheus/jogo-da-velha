@@ -10,10 +10,10 @@
         right: 0px;
     }
     25%{
-        right: 5px;
+        right: 3px;
     }
     75%{
-        right: -5px;
+        right: -3px;
     }
     100%{
         right: 0px;
@@ -53,18 +53,38 @@ table{
 td{
     position: relative;
     text-align: center;
+    text-shadow: 0px 0px 20px black;
+    font-size: 2em;
     background-color: var(--cor4);
     border: 1px solid black;
     border-radius: 3px;
     cursor: pointer;
+    width: 33%;
+    height: 33%;
 }
 td:hover{
     transition: 0.1s;
-    transform: scale(1.1, 1.1);
+    transform: scale(1.03, 1.03);
 }
 
 .tremer{
     animation-name: tremer;
     animation-duration: 0.5s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1;
+}
+
+#velha{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #16DB4E;
+    transition-duration: 1s;
+}
+.mostrar{
+    display: block;
+    opacity: 1;
+}
+.esconder{
+    display: none;
+    opacity: 0;
 }
