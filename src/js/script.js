@@ -1,9 +1,16 @@
-const td = document.querySelectorAll('td') //lista de campos clicáveis 
-const deuVelha = document.getElementById('velha') // tela final do jogo, ainda não programada
+const teclas = document.querySelectorAll('td') //lista de campos clicáveis 
+const telaResultado = document.getElementById('resultado') // tela final do jogo, ainda não programada
+const placaranimado = document.getElementById('mostra-placar')
 let playerAtual = 'X'
 let vencedor = false
-
 let round = 0 //indica o round atual
+let placar = {
+    X: 0, 
+    O: 0,
+    reset: function(){
+        this.X = 0
+        this.O = 0
+    }}
 const possiveisVitorias = [ //combinações de vitória
     [0, 1, 2],
     [3, 4, 5],
@@ -15,7 +22,7 @@ const possiveisVitorias = [ //combinações de vitória
     [2, 4, 6]
 ]
 
-td.forEach(item => {
+teclas.forEach(item => {
     item.addEventListener('click', () =>{
         jogar(item)
     })
@@ -28,14 +35,12 @@ function jogar(item){
         round++
         XouO(item)
         vencedor = confereVitoria(playerAtual)
-        console.log(vencedor)
         if(vencedor == true){
-            resetgame()
+            resultado('vencedor')
         }
-        if(round == 9 && vencedor == false){ //caso dê velha
+        else if(round == 9){ //caso dê velha
             round = 0
-            window.alert('deu velha')
-            resetgame()
+            resultado('velha')
         }
     }
     else{
@@ -58,10 +63,17 @@ function XouO(elemento){ //função que adiciona "X" ou "O" na tela
     }
 }
 
-function resetgame(){
+function resetgame(resetPlacar=false){
+    telaResultado.classList.remove('mostrar')
+    telaResultado.classList.add('esconder')
     round = 0
     playerAtual = 'X'
-    td.forEach(item => {
+    if(resetPlacar == true){
+        placar.reset()
+        placaranimado.innerHTML = `X:${placar.X} VS O: ${placar.O}`
+    }
+    console.log(placar)
+    teclas.forEach(item => {
         item.style.backgroundColor = '#ccc'
         item.innerText = ''
         item.classList.add('livre')
@@ -74,11 +86,26 @@ function resetgame(){
 function confereVitoria(playerAtual){
     return possiveisVitorias.some(combination =>{
         return combination.every(index => {
-            return td[index].classList.contains(playerAtual)
+            return teclas[index].classList.contains(playerAtual)
         })
     })
 }
 
-//Tasks:
-//ver a possibilidade de tirar a variável round
-//adicionar tela caso haja vencedor ou dê velha, essa tela será responsável por travar o jogo antes do reset, terá botão de "OK"
+function resultado(tipo){
+    telaResultado.classList.remove('esconder')
+    telaResultado.classList.add('mostrar')
+    if(tipo=='vencedor'){
+        telaResultado.innerHTML = `<p>"${playerAtual}" foi o vencedor</p> <button onclick="resetgame()">OK</button>`
+        if(playerAtual == 'X'){
+            placar.X += 1
+        }
+        else{
+            placar.O += 1
+        }
+        placaranimado.innerText = `X:${placar.X} VS O: ${placar.O}`
+        console.log(placar)
+    }
+    else if(tipo=='velha'){
+        telaResultado.innerHTML = '<p>Deu velha, empate!</p> <button onclick="resetgame()">OK</button>'
+    }
+}

@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    <!-- perguntar se o jogo será jogado a 2
-    se sim: o jogo será feito em turnos, alterando entre x e o
-    se não: a máquina irá jogar sozinha com o player -->
+    <div id="placar">
+        <h1>Placar</h1>
+        <p id="mostra-placar">X: 0 VS O: 0</p>
+        <button onclick="resetgame(true)">
+        <img src="../img/reset.png" alt="reset">
+        </button>
+    </div>
     <main>
         <h1>Jogo da velha</h1>
         <div id="game">
@@ -35,7 +39,7 @@
             </table>
         </div>
     </main>
-    <div id="velha" class="esconder"></div> <!-- futura tela de vitória -->
+    <div id="resultado" class="esconder"></div> <!-- futura tela de vitória -->
     <script src="../js/script.js"></script>
 </body>
 </html>
