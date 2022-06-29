@@ -1,9 +1,9 @@
 const teclas = document.querySelectorAll('td') //lista de campos clicáveis 
-const telaResultado = document.getElementById('resultado') // tela final do jogo, ainda não programada
+const telaResultado = document.getElementById('resultado') 
 const placaranimado = document.getElementById('mostra-placar')
 let playerAtual = 'X'
 let vencedor = false
-let round = 0 //indica o round atual
+let round = 0
 let placar = {
     X: 0, 
     O: 0,
