@@ -45,6 +45,9 @@ function jogar(item){
     }
     else{
         item.classList.add('tremer')
+        setTimeout(()=>{
+            item.classList.remove('tremer')
+        }, 550)
     }
 }
 
@@ -82,7 +85,6 @@ function resetgame(resetPlacar=false){
     })
 }
 
-// estudar essa parte do código:
 function confereVitoria(playerAtual){
     return possiveisVitorias.some(combination =>{
         return combination.every(index => {
